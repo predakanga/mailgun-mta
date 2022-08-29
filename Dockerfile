@@ -1,4 +1,4 @@
-FROM golang:latest AS builder
+FROM golang:1.19.0-buster AS builder
 
 WORKDIR /go/src/app
 
@@ -7,7 +7,7 @@ ADD . .
 # Latest info on static builds: https://www.arp242.net/static-go.html @ 01/05/2020
 RUN CGO_ENABLED=0 go build
 
-FROM alpine:latest
+FROM alpine:3.16.2
 
 RUN apk add --no-cache postfix ca-certificates && \
 	postconf maillog_file=/dev/stdout \
